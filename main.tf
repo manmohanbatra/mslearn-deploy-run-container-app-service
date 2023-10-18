@@ -19,7 +19,7 @@ resource "azurerm_service_plan" "main" {
 }
 
 resource "azurerm_linux_web_app" "example" {
-  name                = "docker-app-service"
+  name                = "docker-app-service2000"
   resource_group_name = "tf-example"
   location            = "eastus"
   service_plan_id     = azurerm_service_plan.main.id
