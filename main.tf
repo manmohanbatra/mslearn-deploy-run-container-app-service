@@ -12,7 +12,7 @@ provider "azurerm" {
 }
 resource "azurerm_service_plan" "main" {
   name                = "docker-asp"
-  resource_group_name = "tfex120"
+  resource_group_name = "tf-example"
   location            = "eastus"
   os_type                = "Linux"
   sku_name		= "S1"
@@ -20,7 +20,7 @@ resource "azurerm_service_plan" "main" {
 
 resource "azurerm_linux_web_app" "example" {
   name                = "docker-app-service"
-  resource_group_name = "tfex120"
+  resource_group_name = "tf-example"
   location            = "eastus"
   service_plan_id     = azurerm_service_plan.main.id
   site_config {}
