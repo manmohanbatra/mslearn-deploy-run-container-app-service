@@ -15,7 +15,7 @@ resource "azurerm_service_plan" "main" {
   resource_group_name = "tf-example"
   location            = "eastus"
   os_type                = "Linux"
-  sku_name		= "S1"
+  sku_name		= "B1"
 }
 
 resource "azurerm_linux_web_app" "example" {
