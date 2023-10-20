@@ -21,9 +21,10 @@ variables:
 
 stages:
 - stage: Run Terraform
-  displayName: Run Terraform init and apply
+  displayName: RunTerraforminit
   jobs:
     - job: TerraformInit
+      displayName: TerraformInit
       pool:
         vmImage: $(vmImageName)
       steps:
@@ -34,6 +35,7 @@ stages:
           inputs:
             command: 'apply'
             allowTelemetryCollection: true
+
 - stage: Run Build and push stage
   displayName: Build and push stage
   jobs:
