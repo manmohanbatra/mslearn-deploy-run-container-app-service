@@ -1,0 +1,54 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: '87a3ccc4-bfc5-4c43-9ef7-33af6c72bfa9'
+  imageRepository: 'manmohanbatramslearndeployruncontainerappservice'
+  containerRegistry: 'acrshaurya125.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/dotnet/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Run Terraform
+  displayName: Run Terraform init and apply
+  jobs:
+    - job: Terraform init
+      pool:
+        vmImage: $(vmImageName)
+      steps:
+        - task: TerraformInstaller@1
+          inputs:
+            terraformVersion: 'latest'
+        - task: TerraformCLI@1
+          inputs:
+            command: 'apply'
+            allowTelemetryCollection: true
+- stage: Run Build and push stage
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+- stage: 
