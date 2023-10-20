@@ -53,13 +53,16 @@ stages:
           $(tag)
 - stage: 
   displayName: Deploy image to container app
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure for Students(f33e51dd-865a-4944-b765-77ac90d1397c)'
-    appType: 'webAppContainer'
-    WebAppName: 'mslearnwebapp2000'
-    DockerNamespace: 'acrshaurya125.azurecr.io'
-    DockerRepository: 'dockerapp'
-    DockerImageTag: 'latest'
+  jobs:
+    - job: DeployContainer
+      steps:
+      - task: AzureRmWebAppDeployment@4
+        inputs:
+          ConnectionType: 'AzureRM'
+          azureSubscription: 'Azure for Students(f33e51dd-865a-4944-b765-77ac90d1397c)'
+          appType: 'webAppContainer'
+          WebAppName: 'mslearnwebapp2000'
+          DockerNamespace: 'acrshaurya125.azurecr.io'
+          DockerRepository: 'dockerapp'
+          DockerImageTag: 'latest'
   
