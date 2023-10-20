@@ -23,7 +23,7 @@ stages:
 - stage: Run Terraform
   displayName: Run Terraform init and apply
   jobs:
-    - job: Terraform init
+    - job: TerraformInit
       pool:
         vmImage: $(vmImageName)
       steps:
