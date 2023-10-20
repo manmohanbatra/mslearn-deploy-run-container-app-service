@@ -20,21 +20,23 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: RunTerraform
-  displayName: RunTerraforminit
+
+- stage: TerraformStuff
+  displayName: Terraform Install
   jobs:
-    - job: TerraformInit
-      displayName: TerraformInit
-      pool:
-        vmImage: $(vmImageName)
-      steps:
-        - task: TerraformInstaller@1
-          inputs:
-            terraformVersion: 'latest'
-        - task: TerraformCLI@1
-          inputs:
-            command: 'apply'
-            allowTelemetryCollection: true
+  - job: TerraformInstall
+    displayName: Terraform Install
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: TerraformInstaller@1
+      displayName: Terraform Install
+      inputs:
+        terraformVersion: 'latest'
+    - task: TerraformCLI@1
+      inputs:
+        command: 'apply'
+        allowTelemetryCollection: true
 
 - stage: RunBuildandpushstage
   displayName: Build and push stage
@@ -53,7 +55,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-- stage: 
+- stage: DeployApp
   displayName: Deploy image to container app
   jobs:
     - job: DeployContainer
