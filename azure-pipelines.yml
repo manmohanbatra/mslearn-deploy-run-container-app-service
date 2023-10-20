@@ -29,10 +29,10 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - task: TerraformInstaller@1
-      displayName: Terraform Install
+    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+      displayName: 'Install Terraform'
       inputs:
-        terraformVersion: 'latest'
+        terraformVersion: $(terraformVersion)
     - task: TerraformCLI@1
       inputs:
         command: 'apply'
