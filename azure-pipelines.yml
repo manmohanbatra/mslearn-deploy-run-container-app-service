@@ -20,7 +20,7 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: Run Terraform
+- stage: RunTerraform
   displayName: RunTerraforminit
   jobs:
     - job: TerraformInit
