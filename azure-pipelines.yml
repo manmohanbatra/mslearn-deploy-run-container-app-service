@@ -36,7 +36,7 @@ stages:
             command: 'apply'
             allowTelemetryCollection: true
 
-- stage: Run Build and push stage
+- stage: RunBuildandpushstage
   displayName: Build and push stage
   jobs:
   - job: Build
