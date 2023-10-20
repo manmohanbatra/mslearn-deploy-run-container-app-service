@@ -53,4 +53,8 @@ stages:
           $(tag)
 - stage: 
   displayName: Pull ACR Image
+- task: azure container registry@1
+  inputs:
+    ConnectedServiceNameARM: 'Azure for Students(f33e51dd-865a-4944-b765-77ac90d1397c)'
+    ResourceGroupName: 'DockerRG'
   
