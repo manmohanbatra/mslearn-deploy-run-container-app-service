@@ -52,9 +52,14 @@ stages:
         tags: |
           $(tag)
 - stage: 
-  displayName: Pull ACR Image
-- task: azure container registry@1
+  displayName: Deploy image to container app
+- task: AzureRmWebAppDeployment@4
   inputs:
-    ConnectedServiceNameARM: 'Azure for Students(f33e51dd-865a-4944-b765-77ac90d1397c)'
-    ResourceGroupName: 'DockerRG'
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure for Students(f33e51dd-865a-4944-b765-77ac90d1397c)'
+    appType: 'webAppContainer'
+    WebAppName: 'mslearnwebapp2000'
+    DockerNamespace: 'acrshaurya125.azurecr.io'
+    DockerRepository: 'dockerapp'
+    DockerImageTag: 'latest'
   
