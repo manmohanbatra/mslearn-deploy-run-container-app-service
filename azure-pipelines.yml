@@ -56,6 +56,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+
 - stage: DeployApp
   displayName: Deploy image to container app
   jobs:
@@ -68,6 +69,6 @@ stages:
           appType: 'webAppContainer'
           WebAppName: 'mslearnwebapp2000'
           DockerNamespace: 'acrshaurya125.azurecr.io'
-          DockerRepository: 'dockerapp'
-          DockerImageTag: 'latest'
+          DockerRepository: $imageRepository
+          DockerImageTag: $(tag)
   
