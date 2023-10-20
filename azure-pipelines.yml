@@ -52,7 +52,5 @@ stages:
         tags: |
           $(tag)
 - stage: 
-- task: azure container registry@1
-  inputs:
-    ConnectedServiceNameARM: 'Azure for Students(2)(f33e51dd-865a-4944-b765-77ac90d1397c)'
-    ResourceGroupName: 'tf-example'
+  displayName: Pull ACR Image
+  
